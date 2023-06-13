@@ -11,4 +11,11 @@ class Ride
     @excitement = ride[:excitement]
     @total_revenue = 0
   end
+
+  def board_rider(visitor)
+    visitor.spending_money -= @admission_fee
+    if visitor.preferences.find {|pref| pref == excitement} 
+      @total_revenue += @admission_fee
+    end
+  end
 end

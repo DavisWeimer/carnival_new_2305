@@ -25,6 +25,6 @@ class Ride
   end
 
   def rider_eligible?(visitor)
-    visitor.spending_money - @admission_fee >= 0 && visitor.height >= @min_height
+    visitor.spending_money - @admission_fee >= 0 && visitor.tall_enough?(@min_height)
   end
 end

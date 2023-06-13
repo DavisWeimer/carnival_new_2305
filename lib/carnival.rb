@@ -25,4 +25,15 @@ class Carnival
   def total_revenue
     @rides.sum(&:total_revenue)
   end
+
+  def summary
+    # need some more time for this!
+    hash = Hash.new
+    hash[:visitor_count] = @rides.sum {|ride| ride.rider_log.uniq}
+    require 'pry'; binding.pry
+    hash[:revenue_earned] = 
+    @rides.each do |ride|
+      require 'pry'; binding.pry
+    end
+  end
 end

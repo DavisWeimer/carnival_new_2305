@@ -143,7 +143,7 @@ RSpec.describe Carnival do
       @ride3.board_rider(@visitor3) # $13 left
       @ride3.board_rider(@visitor1) # $1, not enough.. bummer Penny
       # 1 ride = $2
-      
+
       expect(@carnival.summary).to eq({
         visitor_count: 3, 
         revenue_earned: 11, 
@@ -180,6 +180,12 @@ RSpec.describe Carnival do
             total_revenue: 2
           }]
         })
+    end
+  end
+
+  describe '#self.total_revenues' do
+    it 'can call a method on the class that returns total_revenue' do
+      expect(Carnival.total_revenues).to eq(11)
     end
   end
 end

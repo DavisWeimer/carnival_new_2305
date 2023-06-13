@@ -36,4 +36,9 @@ class Carnival
       require 'pry'; binding.pry
     end
   end
+
+  def self.total_revenues
+    new_carnival = Carnival.new(14)
+    new_carnival.rides.sum(&:total_revenue)
+  end
 end

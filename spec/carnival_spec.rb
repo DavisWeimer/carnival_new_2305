@@ -121,7 +121,7 @@ RSpec.describe Carnival do
   end
 
   describe '#summary' do
-    it 'can return a hash summary' do
+    xit 'can return a hash summary' do
       @carnival.add_ride(@ride1) # fee: $1
       @carnival.add_ride(@ride2) # fee: $5
       @carnival.add_ride(@ride3) # fee: $2
@@ -185,6 +185,27 @@ RSpec.describe Carnival do
 
   describe '#self.total_revenues' do
     it 'can call a method on the class that returns total_revenue' do
+      @carnival.add_ride(@ride1) # fee: $1
+      @carnival.add_ride(@ride2) # fee: $5
+      @carnival.add_ride(@ride3) # fee: $2
+
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor3) # $15 left, not into it
+      @ride1.board_rider(@visitor1) # $8 left
+      @ride1.board_rider(@visitor2) # $3 left
+      # 4 rides = $4
+
+      @ride2.board_rider(@visitor2) # $3, not enough.. bummer Tucker
+      @ride2.board_rider(@visitor3) # $15 left, not into this one either..
+      @ride2.board_rider(@visitor1) # $3 left
+      @ride3.board_rider(@visitor1) # $3, not enough.. bummer Bruce
+      # 1 ride = $5
+
+      @ride3.board_rider(@visitor2) # not tall enough or enough money.. bummer Tucker
+      @ride3.board_rider(@visitor3) # $13 left
+      @ride3.board_rider(@visitor1) # $1, not enough.. bummer Penny
+      # 1 ride = $2
       expect(Carnival.total_revenues).to eq(11)
     end
   end

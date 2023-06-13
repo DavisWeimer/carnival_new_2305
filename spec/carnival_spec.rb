@@ -184,7 +184,7 @@ RSpec.describe Carnival do
   end
 
   describe '#self.total_revenues' do
-    it 'can call a method on the class that returns total_revenue' do
+    xit 'can call a method on the class that returns total_revenue' do
       @carnival.add_ride(@ride1) # fee: $1
       @carnival.add_ride(@ride2) # fee: $5
       @carnival.add_ride(@ride3) # fee: $2

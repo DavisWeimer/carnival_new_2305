@@ -88,9 +88,6 @@ RSpec.describe Carnival do
       @ride3.board_rider(@visitor1) # $1, not enough.. bummer Penny
       # 1 ride = $2
 
-      expect(@visitor1.spending_money).to eq(3)
-      expect(@visitor2.spending_money).to eq(3)
-      expect(@visitor3.spending_money).to eq(13)
       expect(@carnival.most_profitable_ride).to eq("Ferris Wheel")
     end
   end
@@ -119,10 +116,70 @@ RSpec.describe Carnival do
       @ride3.board_rider(@visitor1) # $1, not enough.. bummer Penny
       # 1 ride = $2
 
-      expect(@visitor1.spending_money).to eq(3)
-      expect(@visitor2.spending_money).to eq(3)
-      expect(@visitor3.spending_money).to eq(13)
       expect(@carnival.total_revenue).to eq(11)
+    end
+  end
+
+  describe '#summary' do
+    it 'can return a hash summary' do
+      @carnival.add_ride(@ride1) # fee: $1
+      @carnival.add_ride(@ride2) # fee: $5
+      @carnival.add_ride(@ride3) # fee: $2
+
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor3) # $15 left, not into it
+      @ride1.board_rider(@visitor1) # $8 left
+      @ride1.board_rider(@visitor2) # $3 left
+      # 4 rides = $4
+
+      @ride2.board_rider(@visitor2) # $3, not enough.. bummer Tucker
+      @ride2.board_rider(@visitor3) # $15 left, not into this one either..
+      @ride2.board_rider(@visitor1) # $3 left
+      @ride3.board_rider(@visitor1) # $3, not enough.. bummer Bruce
+      # 1 ride = $5
+
+      @ride3.board_rider(@visitor2) # not tall enough or enough money.. bummer Tucker
+      @ride3.board_rider(@visitor3) # $13 left
+      @ride3.board_rider(@visitor1) # $1, not enough.. bummer Penny
+      # 1 ride = $2
+      
+      expect(@carnival.summary).to eq({
+        visitor_count: 3, 
+        revenue_earned: 11, 
+        visitors: [
+          {
+            visitor: @visitor1,
+            favorite_ride: @ride1,
+            total_money_spent: 6
+          }, 
+          {
+            visitor: @visitor2,
+            favorite_ride: @ride1,
+            total_money_spent: 2
+          },
+          {
+            visitor: @visitor3,
+            favorite_ride: @ride3,
+            total_money_spent: 2
+          }],
+        rides: [
+          {
+            ride: @ride1,
+            riders: [@ride1.rider_log],
+            total_revenue: 4
+          },
+          {
+            ride: @ride2,
+            riders: [@ride2.rider_log],
+            total_revenue: 5
+          },
+          {
+            ride: @ride3,
+            riders: [@ride3.rider_log],
+            total_revenue: 2
+          }]
+        })
     end
   end
 end

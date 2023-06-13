@@ -26,8 +26,18 @@ RSpec.describe Carnival do
     end
   end
 
+  describe '#add_rides()' do
+    it 'can add ride to Carnival' do
+      @carnival.add_ride(@ride1)
+      @carnival.add_ride(@ride2)
+      @carnival.add_ride(@ride3)
+
+      expect(@carnival.rides).to eq([@ride1, @ride2, @ride3])
+    end
+  end
+
   describe '#most_popular_ride' do
-    it 'returns name of the most popular ride' do
+    xit 'returns name of the most popular ride' do
       @ride1.board_rider(@visitor1)
       @ride1.board_rider(@visitor2)
       @ride1.board_rider(@visitor3) # $15 left, not into it

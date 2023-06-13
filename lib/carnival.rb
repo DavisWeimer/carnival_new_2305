@@ -5,4 +5,8 @@ class Carnival
     @duration = duration
     @rides = Array.new
   end
+
+  def add_ride(ride)
+    @rides.push(ride)
+  end
 end

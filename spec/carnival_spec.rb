@@ -26,7 +26,7 @@ RSpec.describe Carnival do
     end
   end
 
-  describe '#add_rides()' do
+  describe '#add_ride()' do
     it 'can add ride to Carnival' do
       @carnival.add_ride(@ride1)
       @carnival.add_ride(@ride2)

@@ -16,7 +16,6 @@ RSpec.describe Carnival do
     @visitor2.add_preference(:gentle)
     @visitor2.add_preference(:thrilling)
     @visitor3.add_preference(:thrilling)
-
   end
 
   describe 'class' do
@@ -24,6 +23,30 @@ RSpec.describe Carnival do
       expect(@carnival).to be_a(Carnival)
       expect(@carnival.duration).to eq(14)
       expect(@carnival.rides).to eq([])
+    end
+  end
+
+  describe '#most_popular_ride' do
+    it 'returns name of the most popular ride' do
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor3) # $15 left, not into it
+      @ride1.board_rider(@visitor1) # $8 left
+      @ride1.board_rider(@visitor2) # $3 left
+      
+      @ride2.board_rider(@visitor2) # $3, not enough.. bummer Tucker
+      @ride2.board_rider(@visitor3) # $15 left, not into this one either..
+      @ride2.board_rider(@visitor1) # $3 left
+      @ride3.board_rider(@visitor1) # $3, not enough.. bummer Bruce
+
+      @ride3.board_rider(@visitor2) # not tall enough or enough money.. bummer Tucker
+      @ride3.board_rider(@visitor3) # $13 left
+      @ride3.board_rider(@visitor1) # $1, not enough.. bummer Penny
+      
+      expect(@visitor1.spending_money).to eq(3)
+      expect(@visitor2.spending_money).to eq(3)
+      expect(@visitor3.spending_money).to eq(13)
+      expect(@carnival.most_popular_ride).to eq("Carousel")
     end
   end
 end

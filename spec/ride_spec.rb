@@ -53,7 +53,7 @@ RSpec.describe Ride do
       @ride1.board_rider(@visitor3)
       @ride1.board_rider(@visitor1)
 
-      expect(@ride1.ride_log).to eq({
+      expect(@ride1.rider_log).to eq({
         @visitor1=>2,
         @visitor2=>1
       })

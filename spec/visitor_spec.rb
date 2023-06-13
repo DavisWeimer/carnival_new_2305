@@ -13,4 +13,10 @@ RSpec.describe Visitor do
       expect(@visitor1.spending_money).to eq('$10')
     end
   end
+
+  describe '#preferences' do
+    it 'starts as an empty array' do
+      expect(@visitor1.prefrences).to eq([])
+    end
+  end
 end

@@ -13,9 +13,9 @@ class Ride
   end
 
   def board_rider(visitor)
-    visitor.spending_money -= @admission_fee
     if visitor.preferences.find {|pref| pref == excitement} 
       @total_revenue += @admission_fee
+      visitor.spending_money -= @admission_fee
     end
   end
 end

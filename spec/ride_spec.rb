@@ -23,4 +23,17 @@ RSpec.describe Ride do
       expect(@ride1.total_revenue).to eq(0)
     end
   end
+
+  describe '#board_rider()' do
+    it 'can add admission_fee to total_revenue when a Visitor rides' do
+      @visitor1.add_preference(:gentle)
+      @visitor2.add_preference(:gentle)
+      @visitor3.add_preference(:thrilling)
+      
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor3)
+      @ride1.board_rider(@visitor1)
+    end
+  end
 end

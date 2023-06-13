@@ -16,7 +16,7 @@ RSpec.describe Visitor do
 
   describe '#preferences' do
     it 'starts as an empty array' do
-      expect(@visitor1.prefrences).to eq([])
+      expect(@visitor1.preferences).to eq([])
     end
   end
 end

@@ -15,10 +15,17 @@ class Ride
   end
 
   def board_rider(visitor)
-    if visitor.preferences.find {|pref| pref == excitement} 
-      @total_revenue += @admission_fee
-      visitor.spending_money -= @admission_fee
-      @rider_log[visitor] += 1
+    if rider_eligible?(visitor) 
+      if visitor.preferences.find {|pref| pref == excitement} 
+        @total_revenue += @admission_fee
+        visitor.spending_money -= @admission_fee
+        @rider_log[visitor] += 1
+      end
     end
+  end
+
+  def rider_eligible?(visitor)
+    visitor.spending_money - @admission_fee >= 0
+    visitor.height >= @min_height
   end
 end

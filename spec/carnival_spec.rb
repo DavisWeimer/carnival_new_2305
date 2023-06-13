@@ -12,6 +12,10 @@ RSpec.describe Carnival do
     @visitor2 = Visitor.new('Tucker', 36, '$5')
     @visitor3 = Visitor.new('Penny', 64, '$15')
 
+    @visitor1.add_preference(:gentle)
+    @visitor2.add_preference(:gentle)
+    @visitor2.add_preference(:thrilling)
+    @visitor3.add_preference(:thrilling)
 
   end
 
